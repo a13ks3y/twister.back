@@ -1,0 +1,14 @@
+html {
+	font-size: 16px;
+}
+.twister-field {
+	display: grid;
+}
+.twister-field-cell {
+	width: calc(100vw / 8);
+	height: calc(100vh / 6);
+	background: black;
+}
+.twister-field-cell.green {
+	background: green;
+}
