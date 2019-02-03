@@ -1,14 +1,171 @@
 html {
 	font-size: 16px;
 }
+body {
+	position: relative;
+	font-family: Helvetica;
+	background-color: black;
+}
+header {
+	background: #f90;
+	vertical-align: middle;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	align-content: center;
+}
+header h1 {
+	text-align: center;
+	text-shadow: 
+	   -1px -1px 0 rgba(0,0,0,0.6),  
+	    1px -1px 0 rgba(0,0,0,0.6),
+	    -1px 1px 0 rgba(0,0,0,0.6),
+	    1px 1px 0 rgba(0,0,0,0.6);
+	margin: 0.666rem auto;
+	font-size: 1rem;
+	flex: 0.666;
+	color: white;
+	box-shadow: 3rem 3rem 0 black;
+
+}
+header h1:hover {
+	cursor: pointer;
+	box-shadow: 9rem 9rem 0 black;
+	transition: box-shadow 1s;
+}
+/**/
+header .hamburger {
+	display: block;
+	vertical-align: middle;
+	position: absolute;
+	font-size: 1.666rem;
+	padding: 0.333rem;
+	background: transparent;
+	color: black;
+}
+header .hamburger:hover {
+	cursor: pointer;
+}
+header nav {
+	position: fixed;
+	left: 0;
+	top: 2.333rem;
+	background: white;
+	bottom: 0;
+	right: 0;
+	padding: 1.666rem 0;
+	background-image: url(https://upload.wikimedia.org/wikipedia/commons/d/d0/LSD_structural_formulae_v.1.png);
+	background-repeat: no-repeat;
+	background-position: center;
+	background-color: rgba(255, 255, 255, 0.888);
+	background-size: 77%;
+
+	transform: translate3d(-100%, 0, 0);
+	transition: transform 1s;
+	z-index: 666;
+}
+header nav.visible {
+	transform: translate3d(0, 0, 0);
+	transition: transform 1s;
+
+}
+header nav a {
+	display: block;
+	font-size: 1.666rem;
+	text-align: center;
+	margin: 0.666rem auto;
+	background: black;
+	color: #f90;
+	text-decoration: none;
+	max-width: 13rem;
+	padding: 0.666rem 0.333rem;
+	border: 1px solid #f90;
+}
+header nav a:hover {
+	transition: transform 1s;
+	transform: scale3d(1.333,1.333,1);
+}
+/**/
 .twister-field {
+	position: absolute;
+	top: 50vh;
+	transform: translateY(-50%);
+	left: 0; right: 0;
+	height: calc(66vh - 2.666rem);
 	display: grid;
+	grid-template-rows: 0.25fr 0.25fr 0.25fr 0.25fr;
+	grid-template-columns: 0.125fr 0.125fr 0.125fr 0.125fr 0.125fr 0.125fr 0.125fr 0.125fr;
 }
 .twister-field-cell {
-	width: calc(100vw / 8);
-	height: calc(100vh / 6);
-	background: black;
+	position: relative;
+	display: block;
+	width: 12.5vw;
+	height: 12.5vw;
+	background: transparent;
+	vertical-align: middle;
 }
-.twister-field-cell.green {
+.twister-field-cell span {
+	display: block;
+	width: 66.6%;
+	height: 66.6%;
+	color: white;
+	line-height: 7vw;
+	font-size: 7vw;
+	text-align: center;
+	vertical-align: middle;
+	border-radius: 666%;
+	margin: auto;
+	top: 50%; left: 50%;
+	transform: translate(-50%, -50%);
+	position: absolute;
+	font-family: cursive;
+	text-shadow: 
+	   -1px -1px 0 rgba(0,0,0,0.6),  
+	    1px -1px 0 rgba(0,0,0,0.6),
+	    -1px 1px 0 rgba(0,0,0,0.6),
+	     1px 1px 0 rgba(0,0,0,0.6);
+	box-shadow: 
+		-6px -6px 13px #f90,
+		6px -6px 13px #f90,
+		-6px 6px 13px #f90,
+		6px 6px 13px #f90;
+	border: 1px solid black;
+}
+.twister-field-cell span:hover, .twister-field-cell span:active {
+	cursor: pointer;
+	box-shadow: 
+		-6px -6px 13px #fff,
+		6px -6px 13px #fff,
+		-6px 6px 13px #fff,
+		6px 6px 13px #fff;	
+}
+.twister-field-cell span:active {
+	color: #f90;
+	box-shadow: 
+		-6px -6px 13px #f90,
+		6px -6px 13px #f90,
+		-6px 6px 13px #f90,
+		6px 6px 13px #f90;
+}
+
+.twister-field-cell span {
+	background: #ccc;
+}
+.twister-field-cell.green span {
 	background: green;
+}
+.twister-field-cell.yellow span {
+	background: yellow;
+}
+.twister-field-cell.blue span {
+	background: blue;
+}
+.twister-field-cell.red span {
+	background: red;
+}
+
+@media screen and (orientation:portrait) {
+	.twister-field {
+		/*transform: rotate(180deg);*/
+	}
 }
