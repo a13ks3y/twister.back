@@ -10,60 +10,54 @@
 <body>
 	<header>
 		<span id="hamburger" class="hamburger">☰</span>
-		<h1>Twister 2.0</h1>
+		<h1>
+			<span id="current-move">&nbsp;</span>
+			<div>
+				<button id="btnNextMove">Next</button>
+				<button id="btnFail">Fail</button>	
+			</div>
+		</h1>
 		<nav class="menu" id="menu">
-			<a href="#/new">New Game</a>
-			<a href="#/save">Save</a>
-			<a href="#/load">Load</a>
-			<a href="#/share">Share</a>
+			<input type="text" id="player-0" value="Player 1" placeholder="First player name"/>
+			<input type="text" id="player-1" value="Player 2" placeholder="First player name"/>
+			<input type="text" id="player-2" value="Player 3" placeholder="First player name"/>
+			<input type="text" id="player-3" value="Player 4" placeholder="First player name"/>
+			<button id="btnStart">Start</button>
 		</nav>
 	</header>
 	<main>
-		<section class="twister-field">
-			<div class="twister-field-cell green"><span>1</span></div>
-			<div class="twister-field-cell green"><span>1</span></div>
-			<div class="twister-field-cell green"><span>1</span></div>
-			<div class="twister-field-cell green"><span>1</span></div>
+		<!-- g y b r -->
+		<section class="twister-field" id="field">
+			<div class="twister-field-cell g" id="cell-g-0">1</div>
+			<div class="twister-field-cell g" id="cell-g-1">2</div>
+			<div class="twister-field-cell g" id="cell-g-2">3</div>
+			<div class="twister-field-cell g" id="cell-g-3">4</div>
+			<div class="twister-field-cell g" id="cell-g-4">5</div>
+			<div class="twister-field-cell g" id="cell-g-5">6</div>		
 
-			<div class="twister-field-cell green"><span>1</span></div>
-			<div class="twister-field-cell green"><span>1</span></div>
-			<div class="twister-field-cell green"><span>1</span></div>
-			<div class="twister-field-cell green"><span>1</span></div>
+			<div class="twister-field-cell y" id="cell-y-0">1</div>
+			<div class="twister-field-cell y" id="cell-y-1">2</div>
+			<div class="twister-field-cell y" id="cell-y-2">3</div>
+			<div class="twister-field-cell y" id="cell-y-3">4</div>
+			<div class="twister-field-cell y" id="cell-y-4">5</div>
+			<div class="twister-field-cell y" id="cell-y-5">6</div>
 
+			<div class="twister-field-cell b" id="cell-b-0">1</div>
+			<div class="twister-field-cell b" id="cell-b-1">2</div>
+			<div class="twister-field-cell b" id="cell-b-2">3</div>
+			<div class="twister-field-cell b" id="cell-b-3">4</div>
+			<div class="twister-field-cell b" id="cell-b-4">5</div>
+			<div class="twister-field-cell b" id="cell-b-5">6</div>
 
-			<div class="twister-field-cell yellow"><span>2</span></div>
-			<div class="twister-field-cell yellow"><span>2</span></div>
-			<div class="twister-field-cell yellow"><span>2</span></div>
-			<div class="twister-field-cell yellow"><span>2</span></div>
-
-			<div class="twister-field-cell yellow"><span>2</span></div>
-			<div class="twister-field-cell yellow"><span>2</span></div>
-			<div class="twister-field-cell yellow"><span>2</span></div>
-			<div class="twister-field-cell yellow"><span>2</span></div>
-
-
-			<div class="twister-field-cell blue"><span>3</span></div>
-			<div class="twister-field-cell blue"><span>3</span></div>
-			<div class="twister-field-cell blue"><span>3</span></div>
-			<div class="twister-field-cell blue"><span>3</span></div>
-
-			<div class="twister-field-cell blue"><span>3</span></div>
-			<div class="twister-field-cell blue"><span>3</span></div>
-			<div class="twister-field-cell blue"><span>3</span></div>
-			<div class="twister-field-cell blue"><span>3</span></div>
-
-
-			<div class="twister-field-cell red"><span>4</span></div>
-			<div class="twister-field-cell red"><span>4</span></div>
-			<div class="twister-field-cell red"><span>4</span></div>
-			<div class="twister-field-cell red"><span>4</span></div>
-
-			<div class="twister-field-cell red"><span>4</span></div>
-			<div class="twister-field-cell red"><span>4</span></div>
-			<div class="twister-field-cell red"><span>4</span></div>
-			<div class="twister-field-cell red"><span>4</span></div>
+			<div class="twister-field-cell r" id="cell-r-0">1</div>
+			<div class="twister-field-cell r" id="cell-r-1">2</div>
+			<div class="twister-field-cell r" id="cell-r-2">3</div>
+			<div class="twister-field-cell r" id="cell-r-3">4</div>
+			<div class="twister-field-cell r" id="cell-r-4">5</div>
+			<div class="twister-field-cell r" id="cell-r-5">6</div>
 		</section>	
 	</main>
+	<div id="info"></div>
 <script type="text/javascript" src="index.js"></script>
 </body>
 </html>

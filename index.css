@@ -2,9 +2,11 @@ html {
 	font-size: 16px;
 }
 body {
-	position: relative;
+	position: absolute;
 	font-family: Helvetica;
 	background-color: black;
+	width: 100%;
+	height: 100%;
 }
 header {
 	background: #f90;
@@ -36,7 +38,6 @@ header h1:hover {
 /**/
 header .hamburger {
 	display: block;
-	vertical-align: middle;
 	position: absolute;
 	font-size: 1.666rem;
 	padding: 0.333rem;
@@ -54,7 +55,6 @@ header nav {
 	bottom: 0;
 	right: 0;
 	padding: 1.666rem 0;
-	background-image: url(https://upload.wikimedia.org/wikipedia/commons/d/d0/LSD_structural_formulae_v.1.png);
 	background-repeat: no-repeat;
 	background-position: center;
 	background-color: rgba(255, 255, 255, 0.888);
@@ -69,7 +69,7 @@ header nav.visible {
 	transition: transform 1s;
 
 }
-header nav a {
+header nav button {
 	display: block;
 	font-size: 1.666rem;
 	text-align: center;
@@ -81,7 +81,7 @@ header nav a {
 	padding: 0.666rem 0.333rem;
 	border: 1px solid #f90;
 }
-header nav a:hover {
+header nav button:hover {
 	transition: transform 1s;
 	transform: scale3d(1.333,1.333,1);
 }
@@ -94,78 +94,60 @@ header nav a:hover {
 	height: calc(66vh - 2.666rem);
 	display: grid;
 	grid-template-rows: 0.25fr 0.25fr 0.25fr 0.25fr;
-	grid-template-columns: 0.125fr 0.125fr 0.125fr 0.125fr 0.125fr 0.125fr 0.125fr 0.125fr;
+	grid-template-columns: 0.16fr 0.16fr 0.16fr 0.16fr 0.16fr 0.16fr;
+	background-color: white;
+	padding: 2rem 0 0 0;
 }
 .twister-field-cell {
 	position: relative;
 	display: block;
-	width: 12.5vw;
-	height: 12.5vw;
-	background: transparent;
-	vertical-align: middle;
-}
-.twister-field-cell span {
-	display: block;
-	width: 66.6%;
-	height: 66.6%;
-	color: white;
-	line-height: 7vw;
-	font-size: 7vw;
-	text-align: center;
-	vertical-align: middle;
+	width: 9.5vw;
+	height: 9.5vw;
+	margin-left: 3vw;
 	border-radius: 666%;
-	margin: auto;
-	top: 50%; left: 50%;
-	transform: translate(-50%, -50%);
-	position: absolute;
-	font-family: cursive;
-	text-shadow: 
-	   -1px -1px 0 rgba(0,0,0,0.6),  
-	    1px -1px 0 rgba(0,0,0,0.6),
-	    -1px 1px 0 rgba(0,0,0,0.6),
-	     1px 1px 0 rgba(0,0,0,0.6);
-	box-shadow: 
-		-6px -6px 13px #f90,
-		6px -6px 13px #f90,
-		-6px 6px 13px #f90,
-		6px 6px 13px #f90;
-	border: 1px solid black;
+	font-family: monospace;
+	font-size: 3.33rem;
+	text-align: center;
+	line-height: 4.24rem;
+	border: 0.333rem solid white;
+	cursor: default;
 }
-.twister-field-cell span:hover, .twister-field-cell span:active {
+.twister-field-cell.occupied {
+	border: 0.333rem solid black;
 	cursor: pointer;
-	box-shadow: 
-		-6px -6px 13px #fff,
-		6px -6px 13px #fff,
-		-6px 6px 13px #fff,
-		6px 6px 13px #fff;	
 }
-.twister-field-cell span:active {
-	color: #f90;
-	box-shadow: 
-		-6px -6px 13px #f90,
-		6px -6px 13px #f90,
-		-6px 6px 13px #f90,
-		6px 6px 13px #f90;
-}
+.twister-field-cell.r { background-color: red; }
+.twister-field-cell.b { background-color: blue; }
+.twister-field-cell.y { background-color: yellow; }
+.twister-field-cell.g { background-color: green; }
 
-.twister-field-cell span {
-	background: #ccc;
+#info {
+	display: none;
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	width: 33vw;
+	border: 1px solid gray;
+	transform: translate(-50%, -50%);
+	opacity: 0.1;
+	text-align: center;
+    font-size: 2rem;
+    background: black;
+    color: #f90;
+    padding: 6.66rem;
 }
-.twister-field-cell.green span {
-	background: green;
-}
-.twister-field-cell.yellow span {
-	background: yellow;
-}
-.twister-field-cell.blue span {
-	background: blue;
-}
-.twister-field-cell.red span {
-	background: red;
+#info.visible {
+	display: block;
+	opacity: 1;
+	transition: opacity 1s;
 }
 
 @media screen and (orientation:portrait) {
 	.twister-field {
-		/*transform: rotate(180deg);*/
+		transform: rotate(270deg) translate(-26%, -37%);
+		top: 0;
+		bottom: 0;
+		width: 100vh;
+		height: 100vw;
 	}
 }
