@@ -27,13 +27,6 @@ header h1 {
 	font-size: 1rem;
 	flex: 0.666;
 	color: white;
-	box-shadow: 3rem 3rem 0 black;
-
-}
-header h1:hover {
-	cursor: pointer;
-	box-shadow: 9rem 9rem 0 black;
-	transition: box-shadow 1s;
 }
 /**/
 header .hamburger {
@@ -43,6 +36,7 @@ header .hamburger {
 	padding: 0.333rem;
 	background: transparent;
 	color: black;
+	cursor: pointer;
 }
 header .hamburger:hover {
 	cursor: pointer;
@@ -69,6 +63,7 @@ header nav.visible {
 	transition: transform 1s;
 
 }
+/* todo: remove it? */
 header nav button {
 	display: block;
 	font-size: 1.666rem;
@@ -88,29 +83,26 @@ header nav button:hover {
 /**/
 .twister-field {
 	position: absolute;
-	top: 50vh;
-	transform: translateY(-50%);
 	left: 0; right: 0;
-	height: calc(66vh - 2.666rem);
 	display: grid;
 	grid-template-rows: 0.25fr 0.25fr 0.25fr 0.25fr;
 	grid-template-columns: 0.16fr 0.16fr 0.16fr 0.16fr 0.16fr 0.16fr;
 	background-color: white;
-	padding: 2rem 0 0 0;
+	padding: 3rem 2rem;
+	justify-content: end;
 }
 .twister-field-cell {
 	position: relative;
 	display: block;
-	width: 9.5vw;
-	height: 9.5vw;
-	margin-left: 3vw;
+	width: 4rem;
+	height: 4rem;
 	border-radius: 666%;
 	font-family: monospace;
 	font-size: 3.33rem;
 	text-align: center;
-	line-height: 4.24rem;
+	line-height: 4rem;
 	border: 0.333rem solid white;
-	cursor: default;
+	cursor: default;	
 }
 .twister-field-cell.occupied {
 	border: 0.333rem solid black;
@@ -140,6 +132,14 @@ header nav button:hover {
 	display: block;
 	opacity: 1;
 	transition: opacity 1s;
+}
+
+button {
+	background: black;
+	color: white;
+	font-size: 1rem;
+	width: 6.66rem;
+	cursor: pointer;
 }
 
 @media screen and (orientation:portrait) {

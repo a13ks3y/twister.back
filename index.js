@@ -153,8 +153,8 @@ function start() {
 }
 
 function fail() {
-    if (!isCanFail) return;
     const currentPlayer = players[currentPlayerIndex];
+    if (!isCanFail || !currentPlayer) return;
     currentPlayer.freePosition('lh');
     currentPlayer.freePosition('rh');
     currentPlayer.freePosition('lf');
