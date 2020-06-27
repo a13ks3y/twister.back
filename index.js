@@ -7,6 +7,7 @@ const btnStart = document.getElementById('btnStart');
 const btnNextMove = document.getElementById('btnNextMove');
 const btnFail = document.getElementById('btnFail');
 const infoEl = document.getElementById('info');
+const plyaersInfoEl = document.getElementById('players-info');
 const LIMB_NAMES_MAP = {
     lh: 'left ' + PALM_CHAR,
     rh: 'right ' + PALM_CHAR,
@@ -50,6 +51,11 @@ class Player {
     getFreeRandomLimb() {
         const limbNames = Object.keys(this.limbs).filter(k => !this.limbs[k]);
         return limbNames[~~(Math.random()*limbNames.length)];
+    }
+    info() {
+        return '<ul>' + Object.keys(this.limbs).filter(ln => !!this.limbs[ln])
+            .map(limbName => `<li>${LIMB_NAMES_MAP[limbName]} ${COLOR_NAMES_MAP[this.limbs[limbName].color]} ${this.limbs[limbName].index + 1}</li>`)
+            .join(' ') + '</ul>';
     }
 }
 
@@ -114,9 +120,14 @@ function renderField() {
         })
     });
 }
+function renderPlayersInfo() {
+    plyaersInfoEl.innerHTML = '<ul>' +
+    players.map(player => `<li>${player.name} ${player.info()}</li>`).join('\n') + '</ul>';
+}
 function render() {
     renderCurrentMove();
     renderField();
+    renderPlayersInfo();
 }
 
 function nextMove() {
@@ -199,8 +210,9 @@ hamburgerEl.addEventListener('click', () => {
         } else {
             infoEl.classList.add('visible');
         }
+        e.stopPropagation();
     }
-    e.stopPropagation();
+
  });
  document.body.addEventListener('click', function(){
     if (infoEl.classList.contains('visible')) {
