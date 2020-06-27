@@ -9,9 +9,9 @@ const btnFail = document.getElementById('btnFail');
 const infoEl = document.getElementById('info');
 const plyaersInfoEl = document.getElementById('players-info');
 const LIMB_NAMES_MAP = {
-    lh: 'left ' + PALM_CHAR,
+    lh: 'left   ' + PALM_CHAR,
     rh: 'right ' + PALM_CHAR,
-    lf: 'left ' + FOOT_CHAR,
+    lf: 'left   ' + FOOT_CHAR,
     rf: 'right ' + FOOT_CHAR,
 };
 const COLOR_NAMES_MAP = {
@@ -54,7 +54,7 @@ class Player {
     }
     info() {
         return '<ul>' + Object.keys(this.limbs).filter(ln => !!this.limbs[ln])
-            .map(limbName => `<li>${LIMB_NAMES_MAP[limbName]} ${COLOR_NAMES_MAP[this.limbs[limbName].color]} ${this.limbs[limbName].index + 1}</li>`)
+            .map(limbName => `<li>${LIMB_NAMES_MAP[limbName].replace(/\s/g, '&nbsp;')} ${COLOR_NAMES_MAP[this.limbs[limbName].color]} ${this.limbs[limbName].index + 1}</li>`)
             .join(' ') + '</ul>';
     }
 }
