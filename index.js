@@ -121,8 +121,8 @@ function renderField() {
     });
 }
 function renderPlayersInfo() {
-    plyaersInfoEl.innerHTML = '<ul>' +
-    players.map(player => `<li>${player.name} ${player.info()}</li>`).join('\n') + '</ul>';
+    plyaersInfoEl.innerHTML = '<ul class="ul-first">' +
+    players.map(player => `<li class="li-first"><span>${player.name}</span> ${player.info()}</li>`).join('\n') + '</ul>';
 }
 function render() {
     renderCurrentMove();

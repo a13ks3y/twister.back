@@ -190,7 +190,8 @@ main {
 	background: white;
 	color: black;
 	display: block;
-	width: 25vw;
+	width: 36%;
+	padding: 1rem;
 	margin-right: 9rem;
 }
 
@@ -204,6 +205,15 @@ ul li {
 
 li ul {
 	margin-left: 1rem;
+}
+
+li.li-first {
+	float: left;
+	margin: 1rem;
+}
+
+li.li-first ul {
+	margin-top: 0.666rem;
 }
 
 @media screen and (max-width: 1000px) {
