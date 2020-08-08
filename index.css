@@ -214,6 +214,8 @@ li.li-first {
 
 li.li-first ul {
 	margin-top: 0.666rem;
+	min-width: 156px;
+	min-height: 84px;
 }
 
 @media screen and (max-width: 1000px) {
@@ -229,6 +231,15 @@ li.li-first ul {
 	}
 	.players-info {
 		margin-right: 0;
+		margin-left: -50px;
+		min-height: 100%;
+		width: 100%;
+	}
+	.players-info > ul {
+		padding: 0.1rem;
+		width: 21vw;
+		height: 21vh;
+		display: block;
 	}
 	main {
 		display: block;

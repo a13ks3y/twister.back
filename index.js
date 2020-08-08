@@ -20,6 +20,7 @@ const COLOR_NAMES_MAP = {
     b: 'blue',
     r: 'red'
 };
+let isHover = false;
 
 class Player {
     constructor(name) {
@@ -111,18 +112,23 @@ function renderField() {
             if (cellEl) {
                 if (cell) {
                     cellEl.title = cell.player.name + ' ' + LIMB_NAMES_MAP[cell.limbName];
-                    cellEl.classList.add('occupied');
+                    (!isHover || cell.player.isHover) && cellEl.classList.add('occupied');
+                    if (cell.player.isHover) {
+                        cellEl.style.borderColor = '#f90';
+                    } else {
+                        cellEl.style.borderColor = 'inherit';
+                    }
                 } else {
                     cellEl.title = '';
                     cellEl.classList.remove('occupied');
-                }
+                }                
             }
         })
     });
 }
 function renderPlayersInfo() {
     plyaersInfoEl.innerHTML = '<ul class="ul-first">' +
-    players.map(player => `<li class="li-first"><span>${player.name}</span> ${player.info()}</li>`).join('\n') + '</ul>';
+    players.map(player => `<li class="li-first" onmouseleave="pipka('${player.name}');" onmouseover="enter('${player.name}');"><span>${player.name}</span> ${player.info()}</li>`).join('\n') + '</ul>';
 }
 function render() {
     renderCurrentMove();
@@ -160,7 +166,7 @@ function start() {
         player.name = document.getElementById(key).value;
         localStorage.setItem(key, player.name);
     });
-    btnStart.setAttribute('disabled', 'disabled');
+    //btnStart.setAttribute('disabled', 'disabled');
 }
 
 function fail() {
@@ -189,6 +195,26 @@ function fail() {
         location.reload();
     }
 }
+
+function enter(playerName) {
+    console.log('enter', playerName);
+    const player = players.find(player => player.name === playerName);
+    if (player) {        
+        player.isHover = true;
+        isHover = true;
+    }
+    setTimeout(render, 0);
+}
+function pipka(playerName) {
+    console.log('leave', playerName);
+    const player = players.find(player => player.name === playerName);
+    if (player) {
+        player.isHover = false;
+    }
+    isHover = false;
+    render();
+}
+
 
 hamburgerEl.addEventListener('click', () => {
     if (menuEl.classList.contains('visible')) {
