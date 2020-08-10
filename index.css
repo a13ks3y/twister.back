@@ -146,6 +146,9 @@ button {
 	width: 6.66rem;
 	cursor: pointer;
 }
+	button[disabled="disabled"] {
+		cursor: not-allowed;
+	}
 
 
 
@@ -174,6 +177,9 @@ input[type=text] {
 	}
 	input {
 		max-width: 324px;
+	}
+	button {
+		max-width: 4.66rem;
 	}
 }
 

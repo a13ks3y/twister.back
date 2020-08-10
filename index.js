@@ -4,11 +4,16 @@ const hamburgerEl = document.getElementById('hamburger');
 const menuEl = document.getElementById('menu');
 const fieldEl = document.getElementById('field');
 const btnStart = document.getElementById('btnStart');
+const btnPrevMove = document.getElementById('btnPrevMove');
 const btnNextMove = document.getElementById('btnNextMove');
 const btnFail = document.getElementById('btnFail');
 const infoEl = document.getElementById('info');
 const plyaersInfoEl = document.getElementById('players-info');
 const toggleFullScreenElement = document.getElementById('toggle-full-screen');
+
+const history = [];
+let currentMove = 0;
+
 const LIMB_NAMES_MAP = {
     lh: 'left   ' + PALM_CHAR,
     rh: 'right ' + PALM_CHAR,
@@ -48,11 +53,11 @@ class Player {
     }
     getRandomLimb() {
         const limbNames = Object.keys(this.limbs);
-        return limbNames[~~(Math.random()*limbNames.length)];
+        return limbNames[~~(Math.random() * limbNames.length)];
     }
     getFreeRandomLimb() {
         const limbNames = Object.keys(this.limbs).filter(k => !this.limbs[k]);
-        return limbNames[~~(Math.random()*limbNames.length)];
+        return limbNames[~~(Math.random() * limbNames.length)];
     }
     info() {
         return '<ul>' + Object.keys(this.limbs).filter(ln => !!this.limbs[ln])
@@ -69,7 +74,7 @@ const players = [
 ];
 
 players.forEach((player, index) => {
-    const key = 'player-' + index;    
+    const key = 'player-' + index;
     const savedName = localStorage.getItem(key);
     if (savedName && savedName.length) {
         player.name = savedName;
@@ -94,7 +99,7 @@ function getFreeRandomPosition() {
             });
         });
     });
-    return options[~~(Math.random()*options.length)]
+    return options[~~(Math.random() * options.length)]
 }
 function cellId(color, index) {
     return `cell-${color}-${index}`;
@@ -122,22 +127,40 @@ function renderField() {
                 } else {
                     cellEl.title = '';
                     cellEl.classList.remove('occupied');
-                }                
+                }
             }
         })
     });
 }
 function renderPlayersInfo() {
     plyaersInfoEl.innerHTML = '<ul class="ul-first">' +
-    players.map(player => `<li class="li-first" onmouseleave="pipka('${player.name}');" onmouseover="enter('${player.name}');"><span>${player.name}</span> ${player.info()}</li>`).join('\n') + '</ul>';
+        players.map(player => `<li class="li-first" onmouseleave="pipka('${player.name}');" onmouseover="enter('${player.name}');"><span>${player.name}</span> ${player.info()}</li>`).join('\n') + '</ul>';
 }
 function render() {
     renderCurrentMove();
     renderField();
     renderPlayersInfo();
 }
+function prevMove() {
+    if (currentMove == 0) {
+        btnPrevMove.setAttribute('disabled', true);
+    } else {
+        currentMove--;
+        players.forEach(player => {
+            player.limbs = history[currentMove][player.name];
+        });
 
+        render();
+    }
+}
 function nextMove() {
+    btnFail.removeAttribute('disabled');
+    btnPrevMove.removeAttribute('disabled');
+    history[currentMove] = {};
+    players.forEach(player => {
+        history[currentMove][player.name] = Object.assign({}, player.limbs);
+    });
+    currentMove++;
     // cycle through players
     currentPlayerIndex = players.length - 1 > currentPlayerIndex ? currentPlayerIndex + 1 : 0;
     const currentPlayer = players[currentPlayerIndex];
@@ -151,11 +174,11 @@ function nextMove() {
     } else {
         // choose from all limbs
         currentLimb = currentPlayer.getRandomLimb();
-        currentPosition = getFreeRandomPosition();  
-        field[currentPlayer.limbs[currentLimb].color][currentPlayer.limbs[currentLimb].index] = null;      
+        currentPosition = getFreeRandomPosition();
+        field[currentPlayer.limbs[currentLimb].color][currentPlayer.limbs[currentLimb].index] = null;
         currentPlayer.freePosition(currentLimb);
         const positionInfo = currentPlayer.setPositoin(currentLimb, currentPosition);
-        field[currentPosition.color][currentPosition.index] = positionInfo;        
+        field[currentPosition.color][currentPosition.index] = positionInfo;
     }
     isCanFail = true;
     render();
@@ -174,7 +197,10 @@ function start() {
         localStorage.setItem(key, player.name);
     });
     toggleMenu();
+    btnFail.setAttribute('disabled', true);
     //btnStart.setAttribute('disabled', 'disabled');
+
+    render();
 }
 
 function fail() {
@@ -184,7 +210,7 @@ function fail() {
     currentPlayer.freePosition('rh');
     currentPlayer.freePosition('lf');
     currentPlayer.freePosition('rf');
-    
+
     Object.keys(field).forEach(color => {
         field[color].forEach((cell, index) => {
             if (cell && cell.player === currentPlayer) {
@@ -207,7 +233,7 @@ function fail() {
 function enter(playerName) {
     console.log('enter', playerName);
     const player = players.find(player => player.name === playerName);
-    if (player) {        
+    if (player) {
         player.isHover = true;
         isHover = true;
     }
@@ -261,12 +287,13 @@ toggleFullScreenElement.addEventListener("change", e => {
         }
     }
 });
- 
- btnStart.addEventListener('click', start);
- btnNextMove.addEventListener('click', nextMove);
- btnFail.addEventListener('click', fail);
 
- fieldEl.addEventListener('click', function(e) {
+btnStart.addEventListener('click', start);
+btnPrevMove.addEventListener('click', prevMove);
+btnNextMove.addEventListener('click', nextMove);
+btnFail.addEventListener('click', fail);
+
+fieldEl.addEventListener('click', function (e) {
     if (e.target.classList.contains('occupied')) {
         infoEl.innerHTML = e.target.title;
         if (infoEl.classList.contains('visible')) {
@@ -277,10 +304,9 @@ toggleFullScreenElement.addEventListener("change", e => {
         e.stopPropagation();
     }
 
- });
- document.body.addEventListener('click', function(){
+});
+document.body.addEventListener('click', function () {
     if (infoEl.classList.contains('visible')) {
         infoEl.classList.remove('visible');
     }
- });
- 
+});
