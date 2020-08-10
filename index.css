@@ -57,6 +57,11 @@ header nav {
 	transform: translate3d(-100%, 0, 0);
 	transition: transform 1s;
 	z-index: 666;
+	text-align: center;
+	color: white;
+}
+header nav label {
+	line-height: 30px;
 }
 header nav.visible {
 	transform: translate3d(0, 0, 0);

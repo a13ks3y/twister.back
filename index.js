@@ -8,6 +8,7 @@ const btnNextMove = document.getElementById('btnNextMove');
 const btnFail = document.getElementById('btnFail');
 const infoEl = document.getElementById('info');
 const plyaersInfoEl = document.getElementById('players-info');
+const toggleFullScreenElement = document.getElementById('toggle-full-screen');
 const LIMB_NAMES_MAP = {
     lh: 'left   ' + PALM_CHAR,
     rh: 'right ' + PALM_CHAR,
@@ -164,8 +165,15 @@ function start() {
     players.forEach((player, index) => {
         const key = 'player-' + index;
         player.name = document.getElementById(key).value;
+        player.limbs = {
+            lh: null,
+            rh: null,
+            lf: null,
+            rf: null
+        };
         localStorage.setItem(key, player.name);
     });
+    toggleMenu();
     //btnStart.setAttribute('disabled', 'disabled');
 }
 
@@ -215,14 +223,44 @@ function pipka(playerName) {
     render();
 }
 
-
-hamburgerEl.addEventListener('click', () => {
+function toggleMenu() {
     if (menuEl.classList.contains('visible')) {
         menuEl.classList.remove('visible');
     } else {
         menuEl.classList.add('visible');
     }
- });
+}
+
+hamburgerEl.addEventListener('click', toggleMenu);
+toggleFullScreenElement.addEventListener("change", e => {
+    const isInFullScreen = (document.fullscreenElement && document.fullscreenElement !== null) ||
+        (document.webkitFullscreenElement && document.webkitFullscreenElement !== null) ||
+        (document.mozFullScreenElement && document.mozFullScreenElement !== null) ||
+        (document.msFullscreenElement && document.msFullscreenElement !== null);
+
+    const docElm = document.documentElement;
+    if (!isInFullScreen) {
+        if (docElm.requestFullscreen) {
+            docElm.requestFullscreen();
+        } else if (docElm.mozRequestFullScreen) {
+            docElm.mozRequestFullScreen();
+        } else if (docElm.webkitRequestFullScreen) {
+            docElm.webkitRequestFullScreen();
+        } else if (docElm.msRequestFullscreen) {
+            docElm.msRequestFullscreen();
+        }
+    } else {
+        if (document.exitFullscreen) {
+            document.exitFullscreen();
+        } else if (document.webkitExitFullscreen) {
+            document.webkitExitFullscreen();
+        } else if (document.mozCancelFullScreen) {
+            document.mozCancelFullScreen();
+        } else if (document.msExitFullscreen) {
+            document.msExitFullscreen();
+        }
+    }
+});
  
  btnStart.addEventListener('click', start);
  btnNextMove.addEventListener('click', nextMove);
