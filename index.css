@@ -170,21 +170,7 @@ input[type=text] {
 	z-index: 100500;
 }
 
-@media (max-width: 512px) {
-	.github-link img {
-		width: 50px;
-		height: 50px;
-	}
-	input {
-		max-width: 324px;
-	}
-	button {
-		max-width: 3.6rem;
-	}
-	.players-info > ul {
-		height: auto;
-	}
-}
+
 
 @media (min-width: 512px) {
 	.twister-field {
@@ -253,14 +239,38 @@ li.li-first ul {
 		min-height: 100%;
 		width: 100%;
 	}
-	.players-info > ul {
-		padding: 0.1rem;
-		width: 21vw;
-		height: 21vh;
-		display: block;
-	}
+		.players-info > ul {
+			padding: 0.1rem;
+			width: 21vw;
+			height: auto;
+			display: block;
+		}
 	main {
 		display: block;
 		top: 4rem;
+	}
+}
+
+@media (max-width: 512px) {
+	.github-link img {
+		width: 50px;
+		height: 50px;
+	}
+
+	input {
+		max-width: 324px;
+	}
+
+	button {
+		max-width: 3.6rem;
+	}
+
+	.players-info > ul {
+		height: auto;
+		font-size: 16px;
+	}
+
+	li.li-first {
+		margin: 0.25rem;
 	}
 }
