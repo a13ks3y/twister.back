@@ -179,9 +179,9 @@ input[type=text] {
 		max-width: 324px;
 	}
 	button {
-		max-width: 3rem;
+		max-width: 3.6rem;
 	}
-	.ul-first {
+	.players-info > ul {
 		height: auto;
 	}
 }
