@@ -156,31 +156,38 @@ function prevMove() {
 function nextMove() {
     btnFail.removeAttribute('disabled');
     btnPrevMove.removeAttribute('disabled');
-    history[currentMove] = {};
-    players.forEach(player => {
-        history[currentMove][player.name] = Object.assign({}, player.limbs);
-    });
-    currentMove++;
-    // cycle through players
-    currentPlayerIndex = players.length - 1 > currentPlayerIndex ? currentPlayerIndex + 1 : 0;
-    const currentPlayer = players[currentPlayerIndex];
-    // todo DRY
-    if (currentPlayer.isFreeLimb()) {
-        currentLimb = currentPlayer.getFreeRandomLimb();
-        currentPosition = getFreeRandomPosition();
-        const positionInfo = currentPlayer.setPositoin(currentLimb, currentPosition);
-        field[currentPosition.color][currentPosition.index] = positionInfo;
-
+    if (currentMove < history.length - 1) {
+        currentMove++;
+        players.forEach(player => {
+            player.limbs = history[currentMove][player.name];
+        });
     } else {
-        // choose from all limbs
-        currentLimb = currentPlayer.getRandomLimb();
-        currentPosition = getFreeRandomPosition();
-        field[currentPlayer.limbs[currentLimb].color][currentPlayer.limbs[currentLimb].index] = null;
-        currentPlayer.freePosition(currentLimb);
-        const positionInfo = currentPlayer.setPositoin(currentLimb, currentPosition);
-        field[currentPosition.color][currentPosition.index] = positionInfo;
+        history[currentMove] = {};
+        players.forEach(player => {
+            history[currentMove][player.name] = Object.assign({}, player.limbs);
+        });
+        currentMove++;
+        // cycle through players
+        currentPlayerIndex = players.length - 1 > currentPlayerIndex ? currentPlayerIndex + 1 : 0;
+        const currentPlayer = players[currentPlayerIndex];
+        // todo DRY
+        if (currentPlayer.isFreeLimb()) {
+            currentLimb = currentPlayer.getFreeRandomLimb();
+            currentPosition = getFreeRandomPosition();
+            const positionInfo = currentPlayer.setPositoin(currentLimb, currentPosition);
+            field[currentPosition.color][currentPosition.index] = positionInfo;
+
+        } else {
+            // choose from all limbs
+            currentLimb = currentPlayer.getRandomLimb();
+            currentPosition = getFreeRandomPosition();
+            field[currentPlayer.limbs[currentLimb].color][currentPlayer.limbs[currentLimb].index] = null;
+            currentPlayer.freePosition(currentLimb);
+            const positionInfo = currentPlayer.setPositoin(currentLimb, currentPosition);
+            field[currentPosition.color][currentPosition.index] = positionInfo;
+        }
+        isCanFail = true;
     }
-    isCanFail = true;
     render();
 }
 

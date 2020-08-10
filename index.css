@@ -7,6 +7,7 @@ body {
 	background-color: black;
 	width: 100%;
 	height: 100%;
+	margin: 0; padding: 0;
 }
 header {
 	background: #f90;
@@ -234,10 +235,8 @@ li.li-first ul {
 		margin-left: 0;
 	}
 	.players-info {
-		margin-right: 0;
-		margin-left: -50px;
-		min-height: 100%;
-		width: 100%;
+		min-height: 100vh;
+		width: 100vw;
 	}
 		.players-info > ul {
 			padding: 0.1rem;
@@ -252,6 +251,12 @@ li.li-first ul {
 }
 
 @media (max-width: 512px) {
+	#field {
+		display: none;
+	}
+	#info {
+		padding: 3.33rem;
+	}
 	.github-link img {
 		width: 50px;
 		height: 50px;
