@@ -181,6 +181,9 @@ input[type=text] {
 	button {
 		max-width: 4.66rem;
 	}
+	.ul-first {
+		height: auto;
+	}
 }
 
 @media (min-width: 512px) {
